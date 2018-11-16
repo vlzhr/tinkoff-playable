@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wolf Creative</title>
+    <link rel="stylesheet" href="wolf.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+<body>
+    <main>
+        <div class="header">
+            You have earned <span class="points-counter">0</span>$
+            <br><br>
+            <!--<span onclick="moveWolf(0,0)">left top</span>&nbsp;&nbsp;-->
+            <!--<span onclick="moveWolf(0,1)">left bottom</span>&nbsp;&nbsp;-->
+            <!--<span onclick="moveWolf(1,1)">right bottom</span>&nbsp;&nbsp;-->
+            <!--<span onclick="moveWolf(1,0)">right top</span>&nbsp;&nbsp;-->
+        </div>
+        <div class="playground">
+            <div class="player"></div>
+            <div class="prize"></div>
+
+            <div class="gate gate-lt"></div>
+            <div class="gate gate-lb"></div>
+            <div class="gate gate-rb"></div>
+            <div class="gate gate-rt"></div>
+
+            <div class="egg egg-1"></div>
+            <div class="egg egg-2"></div>
+            <div class="egg egg-3"></div>
+            <div class="egg egg-4"></div>
+        </div>
+    </main>
+</body>
+<script src="animations.js"></script>
+<script src="game.js"></script>
+<script src="control.js"></script>
+<script>
+    document.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+    }, { passive: false });
+
+    // document.addEventListener("click", function(e) {
+    //     if ("which" in e) {
+    //         for (var n in [0,1,2,3]) {
+    //             document.querySelectorAll(".egg")[n].style.display = "none";
+    //         }
+    //     }
+    // });
+</script>
+</html>
