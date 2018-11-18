@@ -2,7 +2,7 @@ var playerNode, eggsNodes, gatesNodes, playgroundNode, pointsCounterNode, prizeN
 var playgroundRect;
 var eggsData = [];
 var wolfLocation = [0, 0]; // [isRight, isBottom]
-var eggWidth = 20, eggHeight = 25, gateWidth = 100;
+var eggWidth, eggHeight, eggRect, gateWidth = 100;
 var eggMoveDuration = 4;
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -14,19 +14,28 @@ document.addEventListener("DOMContentLoaded", function() {
     prizeNode = document.querySelector(".prize");
     playgroundRect = playgroundNode.getBoundingClientRect();
 
+    eggRect = eggsNodes[0].getBoundingClientRect();
+    eggHeight = eggRect.height;
+    eggWidth = eggRect.height;
+
+
     for (var n in [0,1,2,3]) {
         n = Number(n);
         var startPosition = getEggStartPosition(n);
-        setEggPosition(n, startPosition[0], startPosition[1]);
+        // setEggPosition(n, startPosition[0], startPosition[1]);
         eggsData.push({"x": startPosition[0], "y": startPosition[1], "isRight": Math.floor(n/2), "isBottom": (n===1 || n===2) });
     }
 
     gameStep();
 });
 
+
+//  0  3    the eggs' locations. sorry for this ....
+//  1  2
+
 function getEggStartPosition(n) {
     var gateRect = gatesNodes[n].getBoundingClientRect();
-    var topValue = gateRect.top - playgroundRect.top - eggHeight - 5;
+    var topValue = gateRect.top - playgroundRect.top + eggHeight*1.2;
     if (n > 1) {
         var leftValue = gateRect.left - playgroundRect.left + gateRect.width - eggWidth;
     } else {
@@ -61,13 +70,15 @@ function showEgg(num) {
 }
 
 function moveEgg(num) {
-    var eggNode = eggsNodes[num];
-    eggNode.classList.add("shown");
-    eggNode.classList.add("moved");
     window.setTimeout(function() {
-        eggNode.classList.remove("shown");
-        eggNode.classList.remove("moved");
-    }, eggMoveDuration*1000)
+        var eggNode = eggsNodes[num];
+        eggNode.classList.add("shown");
+        eggNode.classList.add("moved");
+        window.setTimeout(function() {
+            eggNode.classList.remove("shown");
+            eggNode.classList.remove("moved");
+        }, eggMoveDuration*1000)
+    }, 0);
 }
 
 function flyPrize(delta) {

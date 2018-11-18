@@ -1,8 +1,8 @@
 var gameData = [
     { "egg": 1, "value": 200 },
-    { "egg": 2, "value": 200 },
-    { "egg": 3, "value": -300 },
-    { "egg": 2, "value": 200 }
+    { "egg": 3, "value": 200 },
+    { "egg": 2, "value": -300 },
+    { "egg": 1, "value": 200 }
 ];
 var gameCounter = 0;
 var pointsCounter = 0;
@@ -34,7 +34,7 @@ function gameStep() {
             gameCounter = 0;
         }
         gameStep();
-    }, eggMoveDuration*1000);
+    }, eggMoveDuration*1000 + 50);
 }
 
 function correctPlayerLocation(step) {
