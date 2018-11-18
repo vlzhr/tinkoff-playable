@@ -29,23 +29,29 @@
             <div class="egg egg-2"></div>
             <div class="egg egg-3"></div>
             <div class="egg egg-4"></div>
+
+            <div class="button button-lt">lt</div>
+            <div class="button button-lb">lb</div>
+            <div class="button button-rb">rb</div>
+            <div class="button button-rt">rt</div>
         </div>
     </main>
 </body>
 <script src="animations.js"></script>
 <script src="game.js"></script>
-<script src="control.js"></script>
+<script src="button-controls.js"></script>
 <script>
     document.addEventListener('touchmove', function(e) {
         e.preventDefault();
     }, { passive: false });
 
-    // document.addEventListener("click", function(e) {
-    //     if ("which" in e) {
-    //         for (var n in [0,1,2,3]) {
-    //             document.querySelectorAll(".egg")[n].style.display = "none";
-    //         }
-    //     }
-    // });
+    document.addEventListener("click", function(e) {
+        if ("which" in e) {
+            for (var n in [0,1,2,3]) {
+                document.querySelectorAll(".egg")[n].style.display = "none";
+            }
+            gameon = false;
+        }
+    });
 </script>
 </html>

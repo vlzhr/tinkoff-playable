@@ -6,8 +6,11 @@ var gameData = [
 ];
 var gameCounter = 0;
 var pointsCounter = 0;
+var gameon = true;
 
 function gameStep() {
+    if (!gameon) {return;}
+
     var step = gameData[gameCounter];
     moveEgg(step.egg);
     if (step.value > 0) {

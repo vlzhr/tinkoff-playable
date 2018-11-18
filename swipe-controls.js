@@ -1,3 +1,7 @@
+//  adds ability to move wolf using swipes on the screen
+//  isn't used in the final game version
+
+
 document.addEventListener("DOMContentLoaded", function() {
     document.body.addEventListener("mousedown", mousedownHandler);
     document.body.addEventListener("mouseup", mouseupHandler);

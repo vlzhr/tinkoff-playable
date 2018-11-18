@@ -6,9 +6,9 @@ main {
     width: 100%;
     max-width: 450px;
     box-sizing: border-box;
-    max-height: 700px;
+    max-height: 750px;
     box-shadow: rgba(40,40,40,0.5) 0 0 50px;
-    padding: 25px;
+    /*padding: 25px;*/
     left: -50px;
     top: -50px;
     display: flex;
@@ -26,7 +26,6 @@ main {
     padding: 30px;
     font-size: 18px;
     font-weight: bold;
-    background: rgba(250,250,250,0.9);
 }
 
 .playground {
@@ -35,46 +34,63 @@ main {
     min-height: 400px;
     bottom: 0;
     position: relative;
-    background: rgba(200,200,200,0.5);
 }
 
 .player {
     position: relative;
-    height: 130px;
-    width: 130px;
-    background: url("top-player.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    content: "";
-    margin: 200px auto 20px;
+    /*width: 180px;*/
+    width: 50%;
+    content: url("top-player.png");
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    /*content: "";*/
+    margin: 34% auto 20px;
     transition: scale 1s;
 }
 .player.bottom {
-    background-image: url("bottom-player.png");
+    content: url("bottom-player.png");
 }
 .player.right {
     transform: scale(-1, 1);
 }
 
 .gate {
-    content: "";
+    content: url("gate.png");
     position: absolute;
-    width: 100px;
-    height: 10px;
-    background: #3a768f;
-    top: 150px;
+    width: 24%;
+    top: 36.25%;
     left: 0px;
-    transform: rotate(30deg);
+    /*transform: rotate(30deg);*/
+}
+.button {
+    content: url("button.png");
+    position: absolute;
+    margin: 0 4%;
+    width: 9.4%;
+    top: 81.25%;
+    left: 0px;
 }
 
 .gate-rb, .gate-lb {
-    top: 250px;
+    top: 56.25%;
+}
+.button-rb, .button-lb {
+    transform: rotate(-90deg);
+    top: 90%;
 }
 
 .gate-rt, .gate-rb {
-    transform: rotate(-30deg);
+    transform: scale(-1, 1);
     left: auto;
     right: 0px;
+}
+.button-rt, .button-rb {
+    transform: rotate(180deg);
+    left: auto;
+    right: 0px;
+}
+.button-rt {
+    transform: rotate(90deg);
 }
 
 .egg {
