@@ -4,8 +4,18 @@ var eggsData = [];
 var wolfLocation = [0, 0]; // [isRight, isBottom]
 var eggWidth, eggHeight, eggRect, gateWidth = 100;
 var eggMoveDuration = 4;
+var images = [];
+
+function preload() {
+    for (var i = 0; i < arguments.length; i++) {
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function() {
+    preload("bottom-player.png");
+
     playerNode = document.querySelector(".player");
     eggsNodes = document.querySelectorAll(".egg");
     gatesNodes = document.querySelectorAll(".gate");
