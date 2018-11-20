@@ -117,31 +117,30 @@ main {
 }
 
 .egg {
+    margin: 0;
     position: absolute;
     opacity: 0;
-    /*width: 2px;*/
     height: 7%;
     border-radius: 10px;
-    content: url("coins/pound.png");
 }
 .egg.shown {
     opacity: 1;
-    transition: margin 4s linear;
+
 }
 .egg-1.moved, .egg-2.moved {
     margin-left: 17%;
     animation: eggRotation 2s 2 linear;
+    -webkit-animation: eggRotation1 2s 2 linear;
 }
 .egg-3.moved, .egg-4.moved {
     margin-right: 17%;
     animation: eggRotationBack 2s 2 linear;
+    -webkit-animation: eggRotationBack1 2s 2 linear;
 }
 .egg.moved {
-    margin-top: 16.25%;
+    margin-top: 15.15%;
 }
 .egg.bad {
-    content: url("coins/dollar.png");
-    /*background: mediumvioletred;*/
 }
 @keyframes eggRotation {
     0% { transform: rotate(0deg) }
@@ -150,6 +149,14 @@ main {
 @keyframes eggRotationBack {
     0% { transform: rotate(0deg) }
     100% { transform: rotate(-360deg) }
+}
+@-webkit-keyframes eggRotation1 {
+    0% { -webkit-transform: rotate(0deg) }
+    100% { -webkit-transform: rotate(360deg) }
+}
+@-webkit-keyframes eggRotationBack1 {
+    0% { -webkit-transform: rotate(0deg) }
+    100% { -webkit-transform: rotate(-360deg) }
 }
 
 .prize {
