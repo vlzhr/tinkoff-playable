@@ -2,11 +2,14 @@ function Panel() {
     // top panel with achievements control
     this.node = document.querySelector(".header-panel");
     this.pointsValueNode = document.querySelector(".points-counter");
+    this.arrowNode = document.querySelector(".profit-arrow");
     this.pointsValueNode.innerText = 0;
     this._value = 0;
     this.changeValue = function (delta) {
         this._value += delta;
         this.pointsValueNode.innerText = this._value;
+        if (delta > 0) { this.arrowNode.classList.remove("bad"); }
+        else { this.arrowNode.classList.add("bad"); }
     };
 }
 
@@ -141,7 +144,7 @@ function setUp() {
 
     game = new Game();
     preload("bottom-player.png");
-    // window.setTimeout(game.run, 300);
+    window.setTimeout(game.run, 300);
 }
 document.addEventListener("DOMContentLoaded", setUp);
 

@@ -27,18 +27,60 @@ main {
     padding: 0;
     font-size: 18px;
     font-weight: bold;
+    height: 9.3%;
+    margin: 4% 0 0;
 }
 
-.header-tablo {
-    padding: 10px;
+.header-panel {
+    overflow: hidden;
+    padding: 3px;
     position: relative;
-    margin: 3.12% auto;
+    margin: 0 auto;
+    height: 100%;
     background: rgb(84, 84, 84);
     width: 75%;
-    border-radius: 2px;
+    border-radius: 3px;
     box-sizing: border-box;
     border: rgb(67,64,64) solid 3px; ;
 }
+.header-panel .profit-label {
+    margin: 2% 0;
+    clear: none;
+    position: relative;
+    float: left;
+    width: 30%;
+    content: url("profit-label.png");
+}
+.header-panel .profit-value {
+    box-sizing: border-box;
+    display: flex;
+    margin: 0;
+    position: relative;
+    clear: none;
+    float: left;
+    width: 65%;
+    height: 100%;
+    background: url("profit-value-background.png") no-repeat;
+    background-size: 100%;
+    padding: 3.0%;
+}
+.header-panel .profit-value .value {
+    font-family: "Roboto", sans-serif;
+    width: 70%;
+    height: 100%;
+    margin: auto;
+    color: rgb(53,52,55);
+    font-size: 140%;
+}
+.header-panel .profit-value .profit-arrow {
+    width: 15%;
+    content: url("arrow-green.png");
+    margin: auto;
+}
+.header-panel .profit-value .profit-arrow.bad {
+    content: url("arrow-red.png");
+}
+
 
 .playground {
     box-sizing: border-box;
