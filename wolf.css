@@ -70,7 +70,7 @@ main {
     height: 100%;
     margin: auto;
     color: rgb(53,52,55);
-    font-size: 140%;
+    font-size: 1em;
 }
 .header-panel .profit-value .profit-arrow {
     width: 15%;
