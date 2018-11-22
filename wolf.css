@@ -98,7 +98,7 @@ main {
     /*background-repeat: no-repeat;*/
     /*background-size: cover;*/
     /*content: "";*/
-    margin: 34% auto 20px;
+    margin: 24% auto 20px;
     transition: scale 1s;
 }
 .player.bottom {
@@ -113,31 +113,35 @@ main {
     position: absolute;
     width: 24%;
     height: 18.75%;
-    top: 36.25%;
+    /*top: 36.25%;*/
+    top: 30%;
     left: 0px;
 }
 .egg {
-    top: 36.25%;
+    /*top: 36.25%;*/
+    top: 30%;
 }
 .button {
     content: url("button.png");
     position: absolute;
     margin: 0 8%;
     /*width: 9.4%;*/
-    height: 8.375%;
-    top: 81.25%;
+    height: 12%;/*8.375%;*/
+    top: 75%;/*81.25%;*/
     left: 0px;
 }
 
 .gate-rb, .gate-lb {
-    top: 56.25%;
+    top: 50%;
+    /*top: 56.25%;*/
 }
 .egg-2, .egg-3 {
-    top: 56.25%;
+    top: 50%;
+    /*top: 56.25%;*/
 }
 .button-rb, .button-lb {
     transform: rotate(-90deg);
-    top: 90%;
+    top: 87%;
 }
 
 .gate-rt, .gate-rb {
@@ -172,12 +176,12 @@ main {
 .egg-1.moved, .egg-2.moved {
     margin-left: 17%;
     animation: eggRotation 2s 2 linear;
-    -webkit-animation: eggRotation1 2s 2 linear;
+    -webkit-animation: eggRotation 2s 2 linear;
 }
 .egg-3.moved, .egg-4.moved {
     margin-right: 17%;
     animation: eggRotationBack 2s 2 linear;
-    -webkit-animation: eggRotationBack1 2s 2 linear;
+    -webkit-animation: eggRotationBack 2s 2 linear;
 }
 .egg.moved {
     margin-top: 15.15%;

@@ -31,7 +31,7 @@ function Egg(num) {
     this.run = (coin, interval) => {
         this.node.style["content"] = "url("+this.generateCoinImageLink(coin.value)+")";
         this.node.classList.add("shown", "moved");
-        this.node.style["transition"] = "margin " + interval + "ms linear";
+        this.node.style["transition"] = "margin " + Number(interval) + "ms linear";
         window.setTimeout(this.hide, interval);
     }
 }
@@ -81,7 +81,7 @@ function Game() {
     this.on = true;
     this.panel = new Panel();
     this.wolf = new Wolf();
-    this.defaultInterval = this.interval = 4000;
+    this.defaultInterval = this.interval = 2500;
     this.eggs = [new Egg(1), new Egg(2), new Egg(3), new Egg(4)];
 
     this.checkAfterStep = () => {
