@@ -68,43 +68,62 @@ function Game() {
     this.coinsProfit = {
         "etf_china": {"plus": 100, "minus": -50},
         "etf_america": {"plus": 100, "minus": -40},
-        "bitcoin": {"plus": 100, "minus": -30},
-        "dollar": {"plus": 100, "minus": -200}
+        "bitcoin": {"plus": 2000, "minus": -30},
+        "dollar": {"plus": 60, "minus": -200},
+        "eu": {"plus": 80, "minus": -40},
+        "gbr": {"plus": 555, "minus": -20},
+        "rub": {"plus": 666, "minus": -50},
+        "yen": {"plus": 222, "minus": -30},
+        "etf_gold": {"plus": 777, "minus": -35},
+        "etf_IT": {"plus": 888, "minus": -11},
+        "etf_usa": {"plus": 73, "minus": -88},
+        "etf_japan": {"plus": 200, "minus": -98}
     };
+    this.coinsDataList = Object.keys(this.coinsProfit);
     this.coins = [
-        { "gate": 1, "value": "etf_china" },
-        { "gate": 3, "value": "etf_america" },
+        { "gate": 1, "value": "rub" },
+        { "gate": Math.random*4, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
+        { "gate": 4, "value": "bitcoin" },
+        { "gate": 3, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
+        { "gate": 1, "value": "etf_IT" },
+        { "gate": 4, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
         { "gate": 2, "value": "bitcoin" },
-        { "gate": 1, "value": "dollar" }];
+        { "gate": 3, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
+    ];
 
-    this.currentStep = 0;
+    this.currentStep = this.nextFallCoinNumber = 0;
+    this.nextFallCoin = this.coins[0];
     this.on = true;
     this.panel = new Panel();
     this.wolf = new Wolf();
     this.defaultInterval = this.interval = 2500;
+    this.defaultDistanceInterval = this.distanceInterval = 1300;
     this.eggs = [new Egg(1), new Egg(2), new Egg(3), new Egg(4)];
 
     this.checkAfterStep = () => {
-        this.setNextStep();
-        if (this.currentCoin.gate === this.wolf.gate) {
-            this.panel.changeValue(this.coinsProfit[this.currentCoin.value].plus);
+        if (this.nextFallCoin.gate === this.wolf.gate) {
+            this.panel.changeValue(this.coinsProfit[this.nextFallCoin.value].plus);
         } else {
-            this.panel.changeValue(this.coinsProfit[this.currentCoin.value].minus);
+            this.panel.changeValue(this.coinsProfit[this.nextFallCoin.value].minus);
         }
+        this.nextFallCoinNumber++;
+        this.nextFallCoin = this.coins[this.nextFallCoinNumber%this.coins.length];
     };
 
     this.setNextStep = () => {
         if (!(this.interval < this.defaultInterval/1.7)) {this.interval *= 0.95;}
+        if (!(this.distanceInterval < this.defaultDistanceInterval/1.3)) {this.distanceInterval *= 0.97;}
         this.currentStep++;
         if (this.currentStep >= this.coins.length) { this.currentStep -= this.coins.length; }
     };
 
     this.makeStep = () => {
         if (!this.on) { return; }
-        var coin = this.currentCoin = this.coins[this.currentStep];
+        var coin = this.coins[this.currentStep];
         this.eggs[coin.gate-1].run(coin, this.interval);
         window.setTimeout(this.checkAfterStep, this.interval);
-        window.setTimeout(this.makeStep, this.interval+50);
+        window.setTimeout(this.makeStep, this.distanceInterval);
+        this.setNextStep();
     };
 
     this.run = () => {
