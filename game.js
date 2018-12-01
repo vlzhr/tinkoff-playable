@@ -1,3 +1,23 @@
+function Winscreen() {
+    this.node = document.querySelector(".winscreen");
+    this.preNode = document.querySelector(".pre-winscreen");
+
+    this.actualizeLabels = (value) => {
+        this.node.querySelector(".label").innerHTML = value + "$";
+        this.preNode.querySelector(".label").innerHTML = value + "$";
+    };
+
+    this.show = (value) => {
+        this.actualizeLabels(value);
+      this.preNode.classList.add("shown");
+      window.setTimeout(() => {
+          this.preNode.classList.remove("shown");
+          this.node.classList.add("shown");
+      }, 2000);
+    };
+}
+
+
 function Panel() {
     // top panel with achievements control
     this.node = document.querySelector(".header-panel");
@@ -11,6 +31,9 @@ function Panel() {
         if (delta > 0) { this.arrowNode.classList.remove("bad"); }
         else { this.arrowNode.classList.add("bad"); }
     };
+    this.getValue = () => {
+        return this._value;
+    }
 }
 
 function Egg(num) {
@@ -25,13 +48,15 @@ function Egg(num) {
 
     this.hide = () => {
         this.node.style["transition"] = "";
+        this.node.style["-webkit-transition"] = "";
         this.node.classList.remove("shown", "moved");
     };
 
     this.run = (coin, interval) => {
         this.node.style["content"] = "url("+this.generateCoinImageLink(coin.value)+")";
         this.node.classList.add("shown", "moved");
-        this.node.style["transition"] = "margin " + Number(interval) + "ms linear";
+        this.node.style["transition"] = "margin " + interval + "ms raise-in";
+        this.node.style["-webkit-transition"] = "margin " + interval + "ms linear";
         window.setTimeout(this.hide, interval);
     }
 }
@@ -82,7 +107,7 @@ function Game() {
     this.coinsDataList = Object.keys(this.coinsProfit);
     this.coins = [
         { "gate": 1, "value": "rub" },
-        { "gate": Math.random*4, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
+        { "gate": 2, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
         { "gate": 4, "value": "bitcoin" },
         { "gate": 3, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
         { "gate": 1, "value": "etf_IT" },
@@ -93,26 +118,31 @@ function Game() {
 
     this.currentStep = this.nextFallCoinNumber = 0;
     this.nextFallCoin = this.coins[0];
+    this.goal = 15000;
     this.on = true;
     this.panel = new Panel();
+    this.winscreen = new Winscreen();
     this.wolf = new Wolf();
     this.defaultInterval = this.interval = 2500;
-    this.defaultDistanceInterval = this.distanceInterval = 1300;
+    this.defaultDistanceInterval = this.distanceInterval = 1550;
     this.eggs = [new Egg(1), new Egg(2), new Egg(3), new Egg(4)];
 
     this.checkAfterStep = () => {
         if (this.nextFallCoin.gate === this.wolf.gate) {
             this.panel.changeValue(this.coinsProfit[this.nextFallCoin.value].plus);
-        } else {
+        } else if (this.on) {
             this.panel.changeValue(this.coinsProfit[this.nextFallCoin.value].minus);
+        }
+        if (this.panel.getValue() >= this.goal) {
+            this.end(true);
         }
         this.nextFallCoinNumber++;
         this.nextFallCoin = this.coins[this.nextFallCoinNumber%this.coins.length];
     };
 
     this.setNextStep = () => {
-        if (!(this.interval < this.defaultInterval/1.7)) {this.interval *= 0.95;}
-        if (!(this.distanceInterval < this.defaultDistanceInterval/1.3)) {this.distanceInterval *= 0.97;}
+        if (!(this.interval < this.defaultInterval/1.7)) {this.interval = Math.floor(this.interval*0.95);}
+        if (!(this.distanceInterval < this.defaultDistanceInterval/1.3)) {this.distanceInterval = Math.floor(this.distanceInterval*0.97);}
         this.currentStep++;
         if (this.currentStep >= this.coins.length) { this.currentStep -= this.coins.length; }
     };
@@ -130,6 +160,11 @@ function Game() {
         this.on = true;
         this.makeStep();
     };
+
+    this.end = (showWinscreen) => {
+        this.on = false;
+        this.winscreen.show(this.panel.getValue());
+    }
 }
 
 var game;
@@ -163,6 +198,10 @@ function setUp() {
 
     game = new Game();
     preload("bottom-player.png");
+    for (var c of game.coins) {
+        preload("coins/"+c.value+"_l.png");
+        preload("coins/red_"+c.value+"_l.png");
+    }
     window.setTimeout(game.run, 300);
 }
 document.addEventListener("DOMContentLoaded", setUp);
