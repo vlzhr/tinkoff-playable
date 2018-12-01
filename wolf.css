@@ -1,6 +1,9 @@
 body {
     margin: 0;
 }
+body * {
+    font-family: "Tahoma", sans-serif;
+}
 
 main {
     width: 100%;

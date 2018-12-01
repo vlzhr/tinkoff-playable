@@ -118,7 +118,7 @@ function Game() {
 
     this.currentStep = this.nextFallCoinNumber = 0;
     this.nextFallCoin = this.coins[0];
-    this.goal = 15000;
+    this.goal = 10;
     this.on = true;
     this.panel = new Panel();
     this.winscreen = new Winscreen();
