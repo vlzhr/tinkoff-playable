@@ -161,14 +161,14 @@ main {
 .egg-3, .egg-4 {
     left: auto;
     right: 0%;
-    -webkit-animation: eggRotationBack1 2s infinite;
-    animation: eggRotationBack 2s infinite;
+    -webkit-animation: eggRotationBack1 2s infinite linear;
+    animation: eggRotationBack 2s infinite linear;
 }
 .egg-1, .egg-2 {
     left: 0%;
     margin: 0%;
-    animation: eggRotation 2s infinite;
-    -webkit-animation: eggRotation1 2s infinite;
+    animation: eggRotation 2s infinite linear;
+    -webkit-animation: eggRotation1 2s infinite linear;
 }
 .button-rt {
     transform: rotate(90deg);
