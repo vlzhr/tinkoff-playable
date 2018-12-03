@@ -53,11 +53,14 @@ function Egg(num) {
     };
 
     this.run = (coin, interval) => {
-        this.node.style["content"] = "url("+this.generateCoinImageLink(coin.value)+")";
-        this.node.classList.add("shown", "moved");
-        this.node.style["transition"] = "margin " + interval + "ms raise-in";
-        this.node.style["-webkit-transition"] = "margin " + interval + "ms linear";
-        window.setTimeout(this.hide, interval);
+        this.node.style["content"] = "url('"+this.generateCoinImageLink(coin.value)+"')";
+        // window.setTimeout( () => {
+            this.node.style["transition"] = "margin " + interval + "ms linear";
+            this.node.style["-webkit-transition"] = "margin " + Math.floor(interval) + "ms linear";
+            // this.node.style["animation"] = "eggRotation 2s 2 linear;";
+            // this.node.style["-webkit-animation"] = "eggRotation1 2s linear;";
+            this.node.classList.add("shown", "moved");
+            window.setTimeout(this.hide, interval);
     }
 }
 
@@ -110,15 +113,15 @@ function Game() {
         { "gate": 2, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
         { "gate": 4, "value": "bitcoin" },
         { "gate": 3, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
-        { "gate": 1, "value": "etf_IT" },
+        { "gate": 2, "value": "etf_IT" },
+        { "gate": 1, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
+        { "gate": 3, "value": "bitcoin" },
         { "gate": 4, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
-        { "gate": 2, "value": "bitcoin" },
-        { "gate": 3, "value": this.coinsDataList[Math.floor(Math.random()*this.coinsDataList.length)] },
     ];
 
     this.currentStep = this.nextFallCoinNumber = 0;
     this.nextFallCoin = this.coins[0];
-    this.goal = 10;
+    this.goal = 15000;
     this.on = true;
     this.panel = new Panel();
     this.winscreen = new Winscreen();
@@ -205,5 +208,10 @@ function setUp() {
     window.setTimeout(game.run, 300);
 }
 document.addEventListener("DOMContentLoaded", setUp);
+
+
+function exampleEggsTun() {
+    game.eggs[0].run(game.coins[0], 2000);
+}
 
 
