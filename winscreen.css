@@ -18,11 +18,13 @@
 }
 
 .pre-winscreen .label {
+    font-smooth: never;
+    -webkit-font-smoothing : none;
     position: absolute;
     width: 50%;
     background-color: rgb(245,214,94);
     text-align: center;
-    bottom: 12%;
+    bottom: 11%;
     left: 25%;
     height: 10%;
     font-size: 42px;
@@ -46,6 +48,8 @@
 }
 
 .winscreen .label {
+    font-smooth: never;
+    -webkit-font-smoothing : none;
     position: absolute;
     width: 50%;
     background-color: rgb(245,214,94);
